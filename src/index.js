@@ -1,4 +1,4 @@
-// require('dotenv).config();
+// require('dotenv).config({path:'./env'});
 import dotenv from "dotenv";
 
 import connectDB from "./db/index.js";
@@ -28,8 +28,8 @@ const app=express();
 ;(async()=>{
     try {
         await mongoose.connect(`${process.env.MONGODB_URI}/${DB_NAME}`)
-        app.on("Error",()=>{
-            console.log("ERROR");
+        app.on("Error",(error)=>{
+            console.log("ERROR" ,error);
             throw error
         })
 
