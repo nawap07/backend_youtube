@@ -85,9 +85,9 @@ const registerUser = asyncHandler(async (req, res) => {
     email,
     password,
     username: username.toLowerCase()
-  })
+  }) 
 
-  const createdUser = await User.findById(user._id).select( "-password -refreshToken" )
+  const createdUser = await User.findById(user._id).select( "-password -refereshToken " )
 
   if(!createdUser){
     throw new Error(500,"Something went wrong when registring th user");
@@ -176,7 +176,7 @@ const logOutUser =asyncHandler(async(req,res)=>{
 const refreshAccessToken =asyncHandler(async(req,res)=>{
 const incomingRefreshToken=req.cookies.refereshToken || req.body.refereshToken
 
-if(incomingRefreshToken){
+if(!incomingRefreshToken){
   throw new ApiError(401,"unauthorizes request");
 }
 try {
